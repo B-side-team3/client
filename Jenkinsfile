@@ -1,6 +1,7 @@
 pipeline {
     environment {
-      repository = "rolebit_repo"
+      imagename = "rolebit image"
+      repository = "hareguu89/rolebit_repo"
       DOCKERHUB_CREDENTIALS = credentials('docker_credential')
     }
     agent any

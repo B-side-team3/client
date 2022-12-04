@@ -23,24 +23,24 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <>
-      {/* <SessionProvider session={pageProps.session} refetchInterval={5 * 60}> */}
-      <Seo
-        title="Yesbee"
-        name="viewport"
-        content="initial-scale=1.0, width=device-width"
-      />
-      <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
-          <GlobalStyles />
-          <ReactQueryDevtools initialIsOpen={false} />
-          <ThemeProvider theme={defaultTheme}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </RecoilRoot>
-      </QueryClientProvider>
-      {/* </SessionProvider> */}
+      <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
+        <Seo
+          title="Yesbee"
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+        />
+        <QueryClientProvider client={queryClient}>
+          <RecoilRoot>
+            <GlobalStyles />
+            <ReactQueryDevtools initialIsOpen={false} />
+            <ThemeProvider theme={defaultTheme}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
+          </RecoilRoot>
+        </QueryClientProvider>
+      </SessionProvider>
     </>
   );
 };
