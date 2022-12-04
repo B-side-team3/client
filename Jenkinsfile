@@ -6,11 +6,6 @@ pipeline {
               sh 'docker system prune -a --volumes -f'
           }
       }
-      stage ('Docker Login') { 
-          steps {
-              sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          }
-      }
       stage ('Start Dockerizing') { 
           steps {
               sh 'docker compose up -d'
