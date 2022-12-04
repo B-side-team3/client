@@ -1,10 +1,10 @@
 pipeline {
+    agent any
     environment {
       imagename = "rolebit image"
-      repository = "hareguu89/rolebit_repo"
+      repository = "rolebit_repo"
       DOCKERHUB_CREDENTIALS = credentials('docker_credential')
     }
-    agent any
     stages {
       stage ('Prune Docker data') {
           steps {
