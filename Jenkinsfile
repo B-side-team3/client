@@ -1,8 +1,4 @@
 pipeline {
-    environment {
-      repository = "yesbee2.0"
-      DOCKERHUB_CREDENTIALS = credentials('docker_credential')
-    }
     agent any
     stages {
       stage ('Prune Docker data') {
