@@ -12,7 +12,7 @@ RUN yarn
 
 COPY . /usr/src/app
 
-EXPOSE 3002
+EXPOSE 3000
 
 RUN yarn run build
 
