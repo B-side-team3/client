@@ -1,6 +1,6 @@
 FROM node:16.13.2-alpine
 
-RUN npm i -g npm@8.5.5
+RUN npm i -g npm@9.1.3
 
 WORKDIR /usr/src/app
 
