@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
+import { getToken } from "next-auth/jwt";
 import { signIn, useSession, signOut } from "next-auth/react";
 
 const Home: NextPage = () => {
@@ -7,6 +8,8 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     console.log(session);
+
+    console.log();
   }, [session]);
 
   if (session) {
