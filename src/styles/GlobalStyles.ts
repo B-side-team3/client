@@ -19,7 +19,12 @@ const globalStyles = createGlobalStyle`
         font-size: 14px;
         color: black;
         background-color: white;
-        text-align: center;
+        text-align: left;
+    }
+    button{
+        background: none;
+        border: none;
+        outline: none;
     }
 `;
 

@@ -1,30 +1,20 @@
-import { useEffect } from "react";
 import type { NextPage } from "next";
-import { getToken } from "next-auth/jwt";
-import { signIn, useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+// import { useEffect } from "react";
+// import { signIn, useSession, signOut } from "next-auth/react";
 
 const Home: NextPage = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  useEffect(() => {
-    console.log(session);
-
-    console.log();
-  }, [session]);
-
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user?.name} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  }
+  // useEffect(() => {
+  //   console.log(session);
+  // }, [session]);
 
   return (
     <>
-      Not signed in <br />
-      <button onClick={() => signIn("kakao")}>Sign in</button>
+      <Link href="/login" passHref>
+        로그인 바로가기
+      </Link>
     </>
   );
 };

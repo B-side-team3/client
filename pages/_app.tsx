@@ -25,7 +25,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
     <>
       <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
         <Seo
-          title="Yesbee"
+          title="RoleBit"
           name="viewport"
           content="initial-scale=1.0, width=device-width"
         />
@@ -34,9 +34,13 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
             <GlobalStyles />
             <ReactQueryDevtools initialIsOpen={false} />
             <ThemeProvider theme={defaultTheme}>
-              <Layout>
+              {Component.name === "Login" ? (
                 <Component {...pageProps} />
-              </Layout>
+              ) : (
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              )}
             </ThemeProvider>
           </RecoilRoot>
         </QueryClientProvider>
