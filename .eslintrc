@@ -83,5 +83,5 @@
 		}
 	  ]
 	},
-	"ignorePatterns": ["jest.config.js", "jest.setup.js", "next.config.js"]
+	"ignorePatterns": ["jest.config.js", "jest.setup.js", "next.config.js", "**/*.js"]
   }

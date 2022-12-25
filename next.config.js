@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withPWA = require('next-pwa')({ 
+	dest: 'public', 
+	importScripts: ['customSw.js'],
+    register: true,
+})
+  
+
+module.exports = withPWA({
 	reactStrictMode: true,
 	output: 'standalone',
 	eslint: {
@@ -16,6 +23,4 @@ const nextConfig = {
 	
 		return config;
 	},
-}
-
-module.exports = nextConfig
+  })

@@ -1,20 +1,13 @@
-import type { RecoilState } from "recoil";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { atom } from "recoil";
 
 interface IRoot {
-  spinner: boolean;
+  token: string;
   login?: boolean;
 }
 
-export const Root: RecoilState<IRoot> = atom<IRoot>({
+export const TokenStore = atom<IRoot>({
   key: "Root",
   default: {
-    spinner: false,
+    token: "",
   },
 });

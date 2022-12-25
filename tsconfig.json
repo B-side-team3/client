@@ -47,7 +47,9 @@
     "**/*.spec.tsx",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "coverage"
+    "**/*.js",
+    "**/**/*.js",
+    "coverage",
   ],
   "include": [
     "next-env.d.ts",
@@ -57,6 +59,6 @@
     "**/**/*.ts",
     "src/**.ts",
     "src/**.tsx",
-    "pages"
+    "pages",
   ]
 }
