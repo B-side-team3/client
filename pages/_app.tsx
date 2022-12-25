@@ -1,4 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
+import { useEffect } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
@@ -21,11 +22,27 @@ type AppPropsWithLayout = AppProps & {
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const queryClient = new QueryClient();
 
+  useEffect(() => {
+    if ("serviceWorker" in navigator && "PushManager" in window) {
+      // service worker installation
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then(reg => console.log("reg: ", reg, "\n", "registered"))
+          .catch(e => console.log(e));
+      });
+    }
+  }, []);
+
   return (
     <>
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+      />
       <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
         <Seo
-          title="RoleBit"
+          title="Rolebit"
           name="viewport"
           content="initial-scale=1.0, width=device-width"
         />
