@@ -51,9 +51,13 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
             <GlobalStyles />
             <ReactQueryDevtools initialIsOpen={false} />
             <ThemeProvider theme={defaultTheme}>
-              <Layout>
+              {Component.name === "Login" ? (
                 <Component {...pageProps} />
-              </Layout>
+              ) : (
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              )}
             </ThemeProvider>
           </RecoilRoot>
         </QueryClientProvider>
