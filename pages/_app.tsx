@@ -12,6 +12,10 @@ import Seo from "@components/Seo";
 import GlobalStyles from "src/styles/GlobalStyles";
 import defaultTheme from "src/styles/Theme";
 import "react-toastify/dist/ReactToastify.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPage & {

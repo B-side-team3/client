@@ -19,17 +19,21 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-      <NavContainer>
-        {status === "authenticated" && (
-          <div onClick={() => signOut()}> signout</div>
-        )}
-        {children}
-      </NavContainer>
+      <Wrap>
+        <NavContainer>{children}</NavContainer>
+      </Wrap>
     </>
   );
 };
 
 export default Layout;
+
+const Wrap = styled.div`
+  width: 100%;
+  max-width: 20rem;
+  height: 100%;
+  border: 2px rgba(0, 0, 0, 0.1) dotted;
+`;
 
 const NavContainer = styled.div`
   position: sticky;

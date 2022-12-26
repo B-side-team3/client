@@ -60,7 +60,7 @@ const LoginWrap = styled.div`
     }
     h3 {
       margin: 2rem 0;
-      font-size: 1.3em;
+      font-size: 1.3rem;
       opacity: 0;
       animation: fadeIn 0.5s 1s forwards;
     }
