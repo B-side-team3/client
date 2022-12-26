@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import type { NextPage } from "next";
 // import firebase from "firebase";
 // import "firebase/messaging";
+import { useRouter } from "next/router";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { signIn, useSession, signOut } from "next-auth/react";
@@ -13,6 +14,7 @@ import api from "@utils/interceptor";
 import NotiPermission from "@utils/notification";
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [userInfo, setUserInfo] = useRecoilState(TokenStore);
 
@@ -62,6 +64,9 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     console.log(userInfo.token);
+    if (!userInfo.token) {
+      router.push("login");
+    }
   }, [userInfo.token]);
 
   const getNoti = () => {

@@ -1,41 +1,34 @@
-import { useEffect } from "react";
 import type { NextPage } from "next";
-import { getToken } from "next-auth/jwt";
-import { signIn, useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import { signIn, useSession } from "next-auth/react";
 import styled from "styled-components";
 
 const Login: NextPage = () => {
+  const router = useRouter();
   const { data: session } = useSession();
 
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
-
   if (session) {
+    router.push("home");
+
+    return <></>;
+  } else {
     return (
-      <>
-        Signed in as {session.user?.name} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
+      <LoginWrap>
+        <div className="title-wrap">
+          <h1>롤 모델의 습관</h1>
+          <h2>RoleBit</h2>
+          <h3>롤모델의 습관을 통해 성장하세요.</h3>
+        </div>
+
+        <div className="button-wrap">
+          <button className="login-btn" onClick={() => signIn("kakao")}>
+            <p className="kakao-icon" />
+            <p className="kakao-label">카카오로 3초만에 시작하기</p>
+          </button>
+        </div>
+      </LoginWrap>
     );
   }
-
-  return (
-    <LoginWrap>
-      <div className="title-wrap">
-        <h1>롤 모델의 습관</h1>
-        <h2>RoleBit</h2>
-        <h3>롤모델의 습관을 통해 성장하세요.</h3>
-      </div>
-
-      <div className="button-wrap">
-        <button className="login-btn" onClick={() => signIn("kakao")}>
-          <p className="kakao-icon" />
-          <p className="kakao-label">카카오로 3초만에 시작하기</p>
-        </button>
-      </div>
-    </LoginWrap>
-  );
 };
 
 const LoginWrap = styled.div`
@@ -66,7 +59,7 @@ const LoginWrap = styled.div`
     }
     h3 {
       margin: 2rem 0;
-      font-size: 1.3em;
+      font-size: 1.3rem;
       opacity: 0;
       animation: fadeIn 0.5s 1s forwards;
     }
