@@ -1,16 +1,16 @@
 import type { NextPage } from "next";
-import { initializeApp } from "firebase/app";
-import { getMessaging } from "firebase/messaging";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Routine from "@components/Routine";
+import Todo from "@components/Todo";
 import { TokenStore } from "@store/index";
-import api from "@utils/interceptor";
 import { fcmToken } from "lib/fcm";
 
 const Home: NextPage = () => {
   const [userInfo, setUserInfo] = useRecoilState(TokenStore);
 
+  // TODO: Notification 알림 허용 API를 언제 호출시켜야 할지 정하고 설계해야함.
+  // TODO: Regist / showNotification 둘다.
   const regist = () => {
     if ("serviceWorker" in navigator && "PushManager" in window) {
       // service worker installation
@@ -22,7 +22,6 @@ const Home: NextPage = () => {
       });
     }
   };
-
   const showNoti = async () => {
     const token = await fcmToken();
     if (token) {
@@ -30,14 +29,13 @@ const Home: NextPage = () => {
     }
   };
 
-  const getNoti = async () => api.get("/register");
-
   return (
     <>
       <Style.Container>
         {userInfo.token && <div> token: {userInfo.token}</div>}
         <Routine text="test" isDone={true} isCountinue={true} />
       </Style.Container>
+      <Todo />
     </>
   );
 };
@@ -48,7 +46,9 @@ const Style = {
   Container: styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     padding: 20px;
+    /* height: 100vh; */
   `,
 };
