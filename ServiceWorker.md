@@ -22,7 +22,7 @@ if ('serviceWorker' in navigator) { // 서비스 워커 지원 확인
     });
 }
 ```
-HTML 을 직접 불러오는 main.js (rolebit 프로젝트 에서는 _app.tsx 또는 _document.ts) // 불분명 2022-12-11
+HTML 을 직접 불러오는 main.js (rolebit 프로젝트 에서는 _app.tsx 또는 _document.ts) // 불분명 2022-12-11 -> _document.tsx 에 생성 2022-12-25
 서비스워커를 등록해야 적용이 된다.
 
 service-worker.js 파일을 정의 -> public/sw.js 생성

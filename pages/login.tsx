@@ -1,34 +1,35 @@
+import { useEffect } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import styled from "styled-components";
 
 const Login: NextPage = () => {
+  const { status } = useSession();
   const router = useRouter();
-  const { data: session } = useSession();
 
-  if (session) {
-    router.push("home");
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status]);
 
-    return <></>;
-  } else {
-    return (
-      <LoginWrap>
-        <div className="title-wrap">
-          <h1>롤 모델의 습관</h1>
-          <h2>RoleBit</h2>
-          <h3>롤모델의 습관을 통해 성장하세요.</h3>
-        </div>
+  return (
+    <LoginWrap>
+      <div className="title-wrap">
+        <h1>롤 모델의 습관</h1>
+        <h2>RoleBit</h2>
+        <h3>롤모델의 습관을 통해 성장하세요.</h3>
+      </div>
 
-        <div className="button-wrap">
-          <button className="login-btn" onClick={() => signIn("kakao")}>
-            <p className="kakao-icon" />
-            <p className="kakao-label">카카오로 3초만에 시작하기</p>
-          </button>
-        </div>
-      </LoginWrap>
-    );
-  }
+      <div className="button-wrap">
+        <button className="login-btn" onClick={() => signIn("kakao")}>
+          <p className="kakao-icon" />
+          <p className="kakao-label">카카오로 3초만에 시작하기</p>
+        </button>
+      </div>
+    </LoginWrap>
+  );
 };
 
 const LoginWrap = styled.div`

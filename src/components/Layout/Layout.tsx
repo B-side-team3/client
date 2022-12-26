@@ -1,17 +1,28 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSession, signOut } from "next-auth/react";
 import styled from "styled-components";
-import Footer from "./Footer";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const { status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status !== "authenticated") {
+      router.push("/login");
+    }
+  }, [status]);
+
   return (
-    <Wrap>
-      <NavContainer />
-      {children}
-      <Footer />
-    </Wrap>
+    <>
+      <Wrap>
+        <NavContainer>{children}</NavContainer>
+      </Wrap>
+    </>
   );
 };
 
