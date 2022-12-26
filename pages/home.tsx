@@ -1,10 +1,17 @@
 /* eslint-disable no-plusplus */
+import { useState } from "react";
 import type { NextPage } from "next";
 import styled from "styled-components";
+import type SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const Home: NextPage = () => {
   const todayDate = new Date().getDate();
+  const [swiper, setSwiper] = useState<SwiperCore>();
+
+  const clickDate = (date: number) => {
+    (swiper as SwiperCore).slideTo(date - 1, 500, false);
+  };
 
   const getThisMounth = () => {
     const thisYear = new Date().getFullYear();
@@ -15,7 +22,7 @@ const Home: NextPage = () => {
 
     for (let i = 1; i <= lastDay; i++) {
       thisMonthDays.push(
-        <SwiperSlide key={i}>
+        <SwiperSlide key={i} onClick={() => clickDate(i)}>
           <ol>
             <li className="day">{days[i % 7]}</li>
             <li className="date">{i}</li>
@@ -39,11 +46,7 @@ const Home: NextPage = () => {
           slidesPerView={7}
           centeredSlides
           initialSlide={todayDate - 1}
-          on={{
-            click: e => {
-              console.log(e);
-            },
-          }}
+          onSwiper={swiper => setSwiper(swiper as SwiperCore)}
         >
           {getThisMounth()}
         </Swiper>
