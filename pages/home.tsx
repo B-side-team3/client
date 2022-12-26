@@ -79,6 +79,19 @@ const HomeWrap = styled.div`
     .date {
       width: 100%;
       height: 6rem;
+      .swiper-slide {
+        transition: all 0.5s;
+        .date {
+          transition: all 0.25s;
+          color: #d9d9d9;
+        }
+      }
+      .swiper-slide-prev,
+      .swiper-slide-next {
+        .date {
+          color: #000;
+        }
+      }
       .swiper-slide-active {
         .date {
           &::after {
