@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
@@ -20,19 +20,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
-  const queryClient = new QueryClient();
-
-  useEffect(() => {
-    if ("serviceWorker" in navigator && "PushManager" in window) {
-      // service worker installation
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/service-worker.js")
-          .then(reg => console.log("reg: ", reg, "\n", "registered"))
-          .catch(e => console.log(e));
-      });
-    }
-  }, []);
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <>
@@ -51,13 +39,9 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
             <GlobalStyles />
             <ReactQueryDevtools initialIsOpen={false} />
             <ThemeProvider theme={defaultTheme}>
-              {Component.name === "Login" ? (
+              <Layout>
                 <Component {...pageProps} />
-              ) : (
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              )}
+              </Layout>
             </ThemeProvider>
           </RecoilRoot>
         </QueryClientProvider>

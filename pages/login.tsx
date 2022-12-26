@@ -1,24 +1,18 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import { getToken } from "next-auth/jwt";
-import { signIn, useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import { signIn, useSession } from "next-auth/react";
 import styled from "styled-components";
 
 const Login: NextPage = () => {
-  const { data: session } = useSession();
+  const { status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
-    console.log(session);
-  }, [session]);
-
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user?.name} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  }
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status]);
 
   return (
     <LoginWrap>
