@@ -8,7 +8,7 @@ COPY package*.json ./
 
 COPY yarn.lock ./
 
-RUN yarn RUN --frozen-lockfile
+RUN yarn --frozen-lockfile
 
 COPY . /usr/src/app
 
