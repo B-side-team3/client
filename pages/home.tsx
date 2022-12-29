@@ -35,6 +35,79 @@ const routineData = {
   ],
 };
 
+// 0 미완료
+// 1 진행중
+// 2 완료
+const statusColor: { [key: string]: string } = {
+  incomplete: "#F5313D",
+  ongoing: "#F39200",
+  completion: "#593FF4",
+};
+const todoData = [
+  {
+    time: "오전 6:30 . 기상 직후",
+    data: [
+      {
+        status: "incomplete",
+        todo: "강아지와 포옹하기",
+      },
+      {
+        status: "incomplete",
+        todo: "아침일기 쓰기",
+      },
+      {
+        status: "ongoing",
+        todo: "잠자리 정리",
+      },
+      {
+        status: "incomplete",
+        todo: "하나의 동작 반복하기",
+      },
+      {
+        status: "incomplete",
+        todo: "차 마시기",
+      },
+      {
+        status: "incomplete",
+        todo: "명상하기",
+      },
+      {
+        status: "ongoing",
+        todo: "강아지 물 바꾸기",
+      },
+      {
+        status: "completion",
+        todo: "강아지 밥주기",
+      },
+      {
+        status: "completion",
+        todo: "달리기를 시작할 장소로 이동하기",
+      },
+      {
+        status: "completion",
+        todo: "달리기",
+      },
+    ],
+  },
+  {
+    time: "오전 10:00 . 출근 후",
+    data: [
+      {
+        status: "incomplete",
+        todo: "아이디어 적기",
+      },
+      {
+        status: "incomplete",
+        todo: "아이디어를 수행하기 위한 첫 번째 항목 두번째 항목 세 번째 항목",
+      },
+      {
+        status: "incomplete",
+        todo: "강아지와 산책하기",
+      },
+    ],
+  },
+];
+
 const Home: NextPage = () => {
   const todayDate = new Date().getDate();
   const [swiper, setSwiper] = useState<SwiperCore>();
@@ -146,35 +219,25 @@ const Home: NextPage = () => {
           </ul>
         ) : (
           <ul className="category-to-do">
-            <p>asd</p>
-            {routineData.routine_data.map(
-              (
-                {
-                  startTime,
-                  label,
-                  author,
-                  requiredTime,
-                  totalRoutine,
-                  restRoutine,
-                },
-                index,
-              ) => (
-                <ol key={`${index}th_routine_data`} className="routine_card">
-                  {startTime && <li className="startTime">{startTime}</li>}
-                  <li className="label">{label}</li>
-                  <li className="author">{author}</li>
-                  <li className="data_graph" />
-                  <li className="complete_wrap">
-                    <p className="required_time">{requiredTime}분</p>
-                    <p className="complete">
-                      {restRoutine === totalRoutine
-                        ? "완료"
-                        : `${restRoutine}/${totalRoutine}`}
-                    </p>
-                  </li>
-                </ol>
-              ),
-            )}
+            {todoData.map(({ time, data }, index) => (
+              <ol key={`${index}th_todo_data`}>
+                <p className="time">{time}</p>
+                <li className="todo_wrap">
+                  {data.map(({ status, todo }, index) => (
+                    <div key={`${index}_todo`} className="todo_card">
+                      <div>
+                        <span
+                          className="status-icon"
+                          style={{ backgroundColor: `${statusColor[status]}` }}
+                        />
+                        <span>{todo}</span>
+                      </div>
+                      <button className={status} />
+                    </div>
+                  ))}
+                </li>
+              </ol>
+            ))}
           </ul>
         )}
       </div>
@@ -296,17 +359,19 @@ const HomeWrap = styled.div`
     }
 
     .category-routine{
-      padding: 1rem;
       display: flex;
       flex-direction: column;
+      padding: 1rem;
       gap: 1rem;
+      background-color: #F5F5F5;
       > p {
         position: relative;
         padding: 1rem;
         color: #444444;
         border: #ECECEC 1px solid;
-        border-radius: 6px;
+        border-radius: 16px;
         cursor: pointer;
+        background-color: #fff;
         &::before {
           content: "";
           position: absolute;
@@ -329,7 +394,8 @@ const HomeWrap = styled.div`
         gap: 0.25rem;
         color: #444444;
         border: #ECECEC 1px solid;
-        border-radius: 6px;
+        border-radius: 16px;
+        background-color: #fff;
         li {
           padding: 0 1rem;
         }
@@ -352,6 +418,78 @@ const HomeWrap = styled.div`
           display: flex;
           justify-content: space-between;
           .required_time { color: #888888; }
+        }
+      }
+    }
+
+    .category-to-do {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+      background-color: #F5F5F5;
+      .time{
+        padding: 0.5rem 0;
+        color: #444444;
+        font-weight: 500;
+      }
+      .todo_wrap{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .todo_card{
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          padding: 1rem;
+          background-color: #fff;
+          border-radius: 16px;
+          > div {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            .status-icon{
+              display: block;
+              width: 0.5rem;
+              height: 0.5rem;
+              border-radius: 0.5rem;
+            }
+          }
+          > button{
+            position: relative;
+            width: 24px;
+            height: 24px;
+            border-radius: 24px;
+            background-color: #ECECEC;
+            &.incomplete{
+              background-color: #48D74D;
+            }
+            &::before{
+              content: '';
+              display: block;
+              position: absolute;
+              margin-top: -2px;
+              top:50%;
+              left: 50%;
+              width: 10px;
+              height: 6px;
+              border-top: 2px #fff solid;
+              border-right: 2px #fff solid;
+              transform: translate(-50%, -50%) rotate(135deg);
+            }
+            &.ongoing:: before{
+              border-color: #AAAAAA;
+            }
+            &.completion:: before{
+              margin: 0 0 0 5px;
+              width: 12px;
+              height: 12px;
+              border: 6px transparent solid;
+              border-left: 10px #AAAAAA solid;
+              transform: translate(-50%, -50%);
+              box-sizing: border-box;
+            }
+          }
         }
       }
     }
