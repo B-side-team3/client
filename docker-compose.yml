@@ -2,11 +2,11 @@ version: "3"
 
 services:
   next-app:
+    container_name: rolebit_container
     build:
       context: .
       dockerfile: Dockerfile
     image: rolebit
-    container_name: rolebit_container
     ports:
       - "3000:3000"
     volumes:
