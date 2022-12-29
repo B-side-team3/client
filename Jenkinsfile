@@ -13,6 +13,7 @@ pipeline {
       }
       stage ('Prune Docker data') {
           steps {
+              sh 'docker stop rolebit_container'
               sh 'docker container ls -a -f name=rolebit_container -q | xargs -r docker container rm'
               sh 'docker rmi rolebit'
           }
