@@ -5,13 +5,15 @@ import type {
   Method,
 } from "axios";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { METHOD } from "src/constant/enums";
 
 const handleRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-  config.params = new URLSearchParams(config.params);
+  const token = Cookies.get("Authorization");
 
   return {
     ...config,
+    headers: { Authorization: `${token}` },
   };
 };
 
@@ -28,12 +30,12 @@ const handleResponse = <T>(response: AxiosResponse<T>) => {
 };
 
 const createApiMethod =
-  (_axiosInstance: AxiosInstance, method: Method) =>
+  (axiosInstance: AxiosInstance, method: Method) =>
   (
     url: AxiosRequestConfig["url"],
     config?: Omit<AxiosRequestConfig, "url">,
   ): Promise<any> => {
-    return _axiosInstance({
+    return axiosInstance({
       ...handleRequest({ url, ...config }),
       method,
     }).then(res => handleResponse(res));

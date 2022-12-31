@@ -14,10 +14,12 @@
   "dependencies": {
     "@firebase/messaging-compat": "^0.2.0",
     "@types/firebase": "^3.2.1",
+    "@types/js-cookie": "^3.0.2",
     "@types/uuid": "^9.0.0",
     "axios": "^0.27.2",
     "dayjs": "^1.11.5",
     "firebase": "^9.15.0",
+    "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "mongodb": "^4.9.1",
     "next": "12.1.6",
