@@ -10,7 +10,7 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/");
+      router.push("/home");
     }
   }, [status]);
 

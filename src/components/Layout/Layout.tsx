@@ -29,8 +29,10 @@ const Layout = ({ children }: LayoutProps) => {
 export default Layout;
 
 const Wrap = styled.div`
+  margin: 0 auto;
   width: 100%;
-  max-width: 20rem;
+  min-width: 20rem;
+  max-width: 30rem;
   height: 100%;
   border: 2px rgba(0, 0, 0, 0.1) dotted;
 `;
