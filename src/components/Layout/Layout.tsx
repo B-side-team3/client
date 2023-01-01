@@ -11,11 +11,11 @@ const Layout = ({ children }: LayoutProps) => {
   const { status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status !== "authenticated") {
-      router.push("/login");
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status !== "authenticated") {
+  //     router.push("/login");
+  //   }
+  // }, [status]);
 
   return (
     <>
