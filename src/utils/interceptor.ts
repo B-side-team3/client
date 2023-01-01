@@ -5,15 +5,14 @@ import type {
   Method,
 } from "axios";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { METHOD } from "src/constant/enums";
 
 const handleRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-  const token = Cookies.get("Authorization");
+  const token = localStorage.getItem("rolebit_token");
 
   return {
     ...config,
-    headers: { Authorization: `${token}` },
+    headers: { Authorization: `Bearer ${token}` },
   };
 };
 

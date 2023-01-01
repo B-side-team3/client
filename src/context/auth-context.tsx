@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 
 const AuthContext = createContext({
   authState: { token: null } as { token: string | null },
@@ -23,6 +23,10 @@ const AuthProvider = ({ children }: IAuthProvider) => {
       token: data,
     });
   };
+
+  useEffect(() => {
+    console.log("hi");
+  }, []);
 
   // checks if the user is authenticated or not
   const isUserAuthenticated = () => !!authState.token;

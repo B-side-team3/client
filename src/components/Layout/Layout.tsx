@@ -8,14 +8,15 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { status } = useSession();
+  const { data, status } = useSession();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (status !== "authenticated") {
-  //     router.push("/login");
-  //   }
-  // }, [status]);
+  useEffect(() => {
+    if (data?.user) {
+      localStorage.setItem("rolebit_token", data?.user.token);
+      localStorage.setItem("rolebit_refreshToken", data?.user.refreshToken);
+    }
+  }, [data?.user]);
 
   return (
     <>

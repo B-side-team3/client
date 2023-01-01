@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/order
 import axios from "axios";
-import Cookies from "js-cookie";
 import NextAuth from "next-auth/next";
 import KakaoProvider from "next-auth/providers/kakao";
 
@@ -12,38 +11,32 @@ export default NextAuth({
       checks: "state",
     }),
   ],
+  debug: true,
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account?.provider === "kakao") {
-        console.log(token, account, profile);
-        const { data } = await axios.post(
+        const { data } = await axios.post<AuthResponseType>(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/token`,
           {},
           { headers: { Authorization: `Bearer ${account.access_token}` } },
         );
         if (data) {
-          Cookies.set("Authorization", `Bearer ${data.access_token}`);
-
-          return data;
+          token.accessToken = data.accessToken;
+          token.refreshToken = data.refreshToken;
         }
       }
+
+      return Promise.resolve(token);
     },
-    // 세션에 로그인한 유저 데이터 입력
     async session({ session, user, token }) {
-      // console.log(session, user, token);
+      session.user.token = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
 
       return session;
     },
   },
-  cookies: {
-    sessionToken: {
-      name: `Authorization`,
-      options: {
-        httpOnly: process.env.NODE_ENV === "production", // 배포환경에 따라 true or false 로 바꿔줘야함
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-      },
-    },
+  pages: {
+    signIn: "/",
+    signOut: "/home",
   },
 });
