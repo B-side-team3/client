@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 interface ITimer {
   mm: string;
   ss: string;
+  callback: () => void;
 }
 
-const Timer = ({ mm, ss }: ITimer) => {
+const Timer = ({ mm, ss, callback }: ITimer) => {
   const [minutes, setMinutes] = useState(parseInt(mm, 10));
   const [seconds, setSeconds] = useState(parseInt(ss, 10));
 
@@ -24,7 +25,12 @@ const Timer = ({ mm, ss }: ITimer) => {
       }
     }, 1000);
 
-    return () => clearInterval(countdown);
+    return () => {
+      clearInterval(countdown);
+      if (callback) {
+        callback();
+      }
+    };
   }, [minutes, seconds]);
 
   return (

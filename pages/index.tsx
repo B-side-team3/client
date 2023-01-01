@@ -17,6 +17,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     console.log(session);
   }, [session]);
+
   // TODO: Notification 알림 허용 API를 언제 호출시켜야 할지 정하고 설계해야함.
   // TODO: Regist / showNotification 둘다.
   const regist = () => {
