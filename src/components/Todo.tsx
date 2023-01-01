@@ -2,9 +2,11 @@ import styled from "styled-components";
 import Timer from "./Timer";
 
 const Todo = () => {
+  const test = () => {};
+
   return (
     <S.Container>
-      <Timer mm={"10"} ss={"20"} />
+      <Timer mm={"10"} ss={"20"} callback={test} />
     </S.Container>
   );
 };
