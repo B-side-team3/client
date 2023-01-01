@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Routine from "@components/Routine";
 import Todo from "@components/Todo";
 import { TokenStore } from "@store/index";
+import api from "@utils/interceptor";
 import { fcmToken } from "lib/fcm";
 
 const Home: NextPage = () => {
@@ -22,6 +26,7 @@ const Home: NextPage = () => {
       });
     }
   };
+
   const showNoti = async () => {
     const token = await fcmToken();
     if (token) {
@@ -35,6 +40,13 @@ const Home: NextPage = () => {
         {userInfo.token && <div> token: {userInfo.token}</div>}
         <Routine text="test" isDone={true} isCountinue={true} />
       </Style.Container>
+      <button
+        onClick={() => {
+          signOut();
+        }}
+      >
+        로그아웃
+      </button>
       <Todo />
     </>
   );

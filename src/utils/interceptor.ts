@@ -8,10 +8,11 @@ import axios from "axios";
 import { METHOD } from "src/constant/enums";
 
 const handleRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-  config.params = new URLSearchParams(config.params);
+  const token = localStorage.getItem("rolebit_token");
 
   return {
     ...config,
+    headers: { Authorization: `Bearer ${token}` },
   };
 };
 
@@ -28,12 +29,12 @@ const handleResponse = <T>(response: AxiosResponse<T>) => {
 };
 
 const createApiMethod =
-  (_axiosInstance: AxiosInstance, method: Method) =>
+  (axiosInstance: AxiosInstance, method: Method) =>
   (
     url: AxiosRequestConfig["url"],
     config?: Omit<AxiosRequestConfig, "url">,
   ): Promise<any> => {
-    return _axiosInstance({
+    return axiosInstance({
       ...handleRequest({ url, ...config }),
       method,
     }).then(res => handleResponse(res));

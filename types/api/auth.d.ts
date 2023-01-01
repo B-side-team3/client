@@ -1,4 +1,5 @@
-declare type SignInResponseType = {
-  token: string;
-  isLogged: boolean;
+declare type AuthResponseType = {
+  accessToken: string;
+  createdTime: string;
+  refreshToken: string;
 };

@@ -324,7 +324,7 @@ const HomeWrap = styled.div`
     .category {
       display: flex;
       justify-content: center;
-      cursor pointer;
+      cursor: pointer;
       border-bottom: 1px #aaaaaa solid;
       li {
         position: relative;
@@ -358,17 +358,17 @@ const HomeWrap = styled.div`
       }
     }
 
-    .category-routine{
+    .category-routine {
       display: flex;
       flex-direction: column;
       padding: 1rem;
       gap: 1rem;
-      background-color: #F5F5F5;
+      background-color: #f5f5f5;
       > p {
         position: relative;
         padding: 1rem;
         color: #444444;
-        border: #ECECEC 1px solid;
+        border: #ececec 1px solid;
         border-radius: 16px;
         cursor: pointer;
         background-color: #fff;
@@ -382,7 +382,7 @@ const HomeWrap = styled.div`
           border-color: transform;
           border-bottom: 2px solid #444444;
           border-right: 2px solid #444444;
-          transform: translate(-50%,-50%) rotate(-45deg);
+          transform: translate(-50%, -50%) rotate(-45deg);
         }
       }
 
@@ -393,7 +393,7 @@ const HomeWrap = styled.div`
         padding: 0 0 0.5rem;
         gap: 0.25rem;
         color: #444444;
-        border: #ECECEC 1px solid;
+        border: #ececec 1px solid;
         border-radius: 16px;
         background-color: #fff;
         li {
@@ -401,7 +401,7 @@ const HomeWrap = styled.div`
         }
         .startTime {
           padding: 1rem;
-          border-bottom: 1px #ECECEC solid;
+          border-bottom: 1px #ececec solid;
         }
         .label {
           font-size: 17px;
@@ -411,13 +411,15 @@ const HomeWrap = styled.div`
           color: #666666;
           font-size: 13px;
         }
-        .data_graph{
+        .data_graph {
           padding: 2rem 0 1rem;
         }
         .complete_wrap {
           display: flex;
           justify-content: space-between;
-          .required_time { color: #888888; }
+          .required_time {
+            color: #888888;
+          }
         }
       }
     }
@@ -427,17 +429,17 @@ const HomeWrap = styled.div`
       flex-direction: column;
       padding: 1rem;
       gap: 1rem;
-      background-color: #F5F5F5;
-      .time{
+      background-color: #f5f5f5;
+      .time {
         padding: 0.5rem 0;
         color: #444444;
         font-weight: 500;
       }
-      .todo_wrap{
+      .todo_wrap {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        .todo_card{
+        .todo_card {
           position: relative;
           display: flex;
           justify-content: space-between;
@@ -448,28 +450,28 @@ const HomeWrap = styled.div`
             display: flex;
             align-items: center;
             gap: 1rem;
-            .status-icon{
+            .status-icon {
               display: block;
               width: 0.5rem;
               height: 0.5rem;
               border-radius: 0.5rem;
             }
           }
-          > button{
+          > button {
             position: relative;
             width: 24px;
             height: 24px;
             border-radius: 24px;
-            background-color: #ECECEC;
-            &.incomplete{
-              background-color: #48D74D;
+            background-color: #ececec;
+            &.incomplete {
+              background-color: #48d74d;
             }
-            &::before{
-              content: '';
+            &::before {
+              content: "";
               display: block;
               position: absolute;
               margin-top: -2px;
-              top:50%;
+              top: 50%;
               left: 50%;
               width: 10px;
               height: 6px;
@@ -477,15 +479,15 @@ const HomeWrap = styled.div`
               border-right: 2px #fff solid;
               transform: translate(-50%, -50%) rotate(135deg);
             }
-            &.ongoing:: before{
-              border-color: #AAAAAA;
+            &.ongoing::before {
+              border-color: #aaaaaa;
             }
-            &.completion:: before{
+            &.completion::before {
               margin: 0 0 0 5px;
               width: 12px;
               height: 12px;
               border: 6px transparent solid;
-              border-left: 10px #AAAAAA solid;
+              border-left: 10px #aaaaaa solid;
               transform: translate(-50%, -50%);
               box-sizing: border-box;
             }
