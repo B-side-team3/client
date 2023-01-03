@@ -10,7 +10,7 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/");
+      router.push("/home");
     }
   }, [status]);
 
@@ -101,7 +101,7 @@ const LoginWrap = styled.div`
     }
     @keyframes fadeIn {
       from {
-        margin-top: -1rem;
+        transform: translateY(40px);
         opacity: 0;
       }
       to {
