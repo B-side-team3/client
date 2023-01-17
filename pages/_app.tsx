@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";

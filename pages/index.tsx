@@ -4,6 +4,7 @@ import type { NextPage } from "next";
 import styled from "styled-components";
 import type SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getList, getTaskList } from "@services/myroutines";
 
 const routineData = {
   deadline_count: 3,
@@ -125,7 +126,6 @@ const Home: NextPage = () => {
     const firstDay = new Date(`${thisYear}-${thisMonth}-1`).getDay();
     const thisMonthDays = [];
     const days = ["일", "월", "화", "수", "목", "금", "토"];
-    console.log(lastDate);
 
     for (let i = 1; i <= lastDate; i++) {
       thisMonthDays.push(
@@ -155,10 +155,17 @@ const Home: NextPage = () => {
     (e.target as HTMLLIElement).classList.add("active");
   };
 
+  const onTest = async () => {
+    const taskList = await getTaskList();
+    const list = await getList();
+    console.log(list, taskList);
+  };
+
   return (
     <HomeWrap>
       <div className="title-wrap">
         <h3>나의 루틴</h3>
+        {/* <button onClick={onTest}>test </button> */}
       </div>
 
       <div className="date-wrap">
