@@ -6,6 +6,26 @@ import type SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getList, getTaskList } from "@services/myroutines";
 
+const colorList = [
+  "#4E71CC",
+  "#8D2476",
+  "#775EDC",
+  "#94B8FF",
+  "#ADA8D0",
+  "#E8D52D",
+  "#E2B344",
+  "#AC8345",
+  "#F9845A",
+  "#61835F",
+  "#8AAA5C",
+  "#38B455",
+  "#59D68B",
+  "#8AECE4",
+  "#FE9DBE",
+  "#FC5D5D",
+  "#AB374C",
+  "#1F1F1F",
+];
 const routineData = {
   deadline_count: 3,
   routine_data: [
@@ -36,14 +56,15 @@ const routineData = {
   ],
 };
 
+// Example color
 // 0 미완료
 // 1 진행중
 // 2 완료
-const statusColor: { [key: string]: string } = {
-  incomplete: "#F5313D",
-  ongoing: "#F39200",
-  completion: "#593FF4",
-};
+// const statusColor: { [key: string]: string } = {
+//   incomplete: "#F5313D",
+//   ongoing: "#F39200",
+//   completion: "#593FF4",
+// };
 const todoData = [
   {
     time: "오전 6:30 . 기상 직후",
@@ -112,10 +133,14 @@ const todoData = [
 const Home: NextPage = () => {
   const todayDate = new Date().getDate();
   const [swiper, setSwiper] = useState<SwiperCore>();
+  const [{ task, routine }, setSelectedDayData] = useState<SwiperCore>();
   const [tab, setTab] = useState("routine");
 
-  const clickDate = (date: number) => {
+  const clickDate = async (date: number) => {
     (swiper as SwiperCore).slideTo(date - 1, 500, false);
+    const taskList = await getTaskList();
+    const routineList = await getList();
+    setSelectedDayData({ task: taskList, routine: routineList });
   };
 
   const getThisMounth = () => {
@@ -153,12 +178,6 @@ const Home: NextPage = () => {
       parentElement[i].classList.remove("active");
     }
     (e.target as HTMLLIElement).classList.add("active");
-  };
-
-  const onTest = async () => {
-    const taskList = await getTaskList();
-    const list = await getList();
-    console.log(list, taskList);
   };
 
   return (
@@ -247,7 +266,13 @@ const Home: NextPage = () => {
                       <div>
                         <span
                           className="status-icon"
-                          style={{ backgroundColor: `${statusColor[status]}` }}
+                          style={{
+                            backgroundColor: `${
+                              colorList[
+                                Math.floor(Math.random() * colorList.length)
+                              ]
+                            }`,
+                          }}
                         />
                         <span>{todo}</span>
                       </div>
