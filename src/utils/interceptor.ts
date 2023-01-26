@@ -40,6 +40,15 @@ const createApiMethod =
     }).then(res => handleResponse(res));
   };
 
+axiosInstance.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    console.log(error);
+  },
+);
+
 export default {
   get: createApiMethod(axiosInstance, METHOD.GET),
   post: createApiMethod(axiosInstance, METHOD.POST),

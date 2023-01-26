@@ -1,3 +1,7 @@
+export interface DateType {
+  date: string;
+}
+
 export interface TaskResponse {
   actualTime: number;
   createdDate: string;

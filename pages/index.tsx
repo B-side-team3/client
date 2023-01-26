@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import styled from "styled-components";
 import type SwiperCore from "swiper";
@@ -113,6 +113,18 @@ const Home: NextPage = () => {
   const todayDate = new Date().getDate();
   const [swiper, setSwiper] = useState<SwiperCore>();
   const [tab, setTab] = useState("routine");
+  // const [todoData, setTodoData] = useState([]);
+  // const [routineData, setRoutineData] = useState([]);
+
+  // useEffect(() => {
+  //   async function setData() {
+  //     const taskList = await getTaskList({ date: "2021-01-01" });
+  //     const list = await getList({ date: "2021-01-01" });
+  //     setRoutineData(taskList);
+  //     setTodoData(list);
+  //   }
+  //   setData();
+  // }, []);
 
   const clickDate = (date: number) => {
     (swiper as SwiperCore).slideTo(date - 1, 500, false);
@@ -156,8 +168,8 @@ const Home: NextPage = () => {
   };
 
   const onTest = async () => {
-    const taskList = await getTaskList();
-    const list = await getList();
+    const taskList = await getTaskList({ date: "2023-01-25" });
+    const list = await getList({ date: "2023-01-25" });
     console.log(list, taskList);
   };
 
@@ -165,7 +177,7 @@ const Home: NextPage = () => {
     <HomeWrap>
       <div className="title-wrap">
         <h3>나의 루틴</h3>
-        {/* <button onClick={onTest}>test </button> */}
+        <button onClick={onTest}>test </button>
       </div>
 
       <div className="date-wrap">
