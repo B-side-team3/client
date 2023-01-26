@@ -177,7 +177,7 @@ const Home: NextPage = () => {
     <HomeWrap>
       <div className="title-wrap">
         <h3>나의 루틴</h3>
-        <button onClick={onTest}>test </button>
+        {/* <button onClick={onTest}>test </button> */}
       </div>
 
       <div className="date-wrap">
